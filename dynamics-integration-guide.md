@@ -31,3 +31,47 @@ The trigger should accept JSON like this:
   "campaignSource": "TEMPLATE_001",
   "websiteUrl": "https://microsite.example.com"
 }
+Step 3: Map Lead Fields
+
+
+HTTP Field	Dynamics Field	Required
+firstName	firstname	Yes
+lastName	lastname	Yes
+email	emailaddress1	Yes
+phone	telephone1	No
+company	companyname	No
+message	description	No
+campaignSource	Subject or custom field	Yes
+websiteUrl	websiteurl	No
+
+Step 4: Add Error Handling
+Add a "Scope" action and configure:
+
+Try: Main logic
+Catch: Send error notification
+Finally: Log to analytics
+Step 5: Get Webhook URL
+Save the flow
+Copy the HTTP POST URL
+Add this URL to your microsite's config.js file
+Security Considerations
+Protect Your Webhook
+Use HTTPS only - Reject HTTP requests
+Implement rate limiting - Prevent spam
+Validate origin - Check referrer headers
+Add reCAPTCHA - Prevent bot submissions
+Sanitize inputs - Prevent injection attacks
+Authentication Options
+Option 1: Public Webhook (Simple)
+No authentication required
+Relies on obscurity of URL
+Add reCAPTCHA for protection
+Best for: Low-risk lead capture
+Option 2: Shared Secret (Better)
+Include secret key in request headers
+Validate in Power Automate
+Best for: Medium-risk applications
+Option 3: OAuth 2.0 (Most Secure)
+Full authentication flow
+Token-based access
+Best for: High-security requirements
